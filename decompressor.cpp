@@ -19,9 +19,6 @@ map<char, int> getFreqMap(ifstream &sourceFileHeader)
         if (line == "EOH")
             break;
 
-        // if (line == "")
-        //     continue; // this is kind of a bug, will handle later
-
         if (line.substr(0, 3) == "EOL")
         {
 
@@ -40,9 +37,8 @@ map<char, int> getFreqMap(ifstream &sourceFileHeader)
         }
 
         cout << character << " " << frequency << endl;
-        // if (frequency == "")
-        //     continue;
-        freqMap[character] = stoi(frequency); // this is kind of a bug, will handle later
+
+        freqMap[character] = stoi(frequency); 
     }
 
     return freqMap;
@@ -50,7 +46,8 @@ map<char, int> getFreqMap(ifstream &sourceFileHeader)
 
 void decompressFile(ifstream &sourceFile, ofstream &destinationFile, huffmanNode *huffmanTreeRoot)
 {
-    // read bit by bit not char (whih is 8 bits)
+    // read bit by bit 
+    // one char = 8 bits
     char ch;
     huffmanNode *currNode = huffmanTreeRoot;
     cout << "decompressing file\n";
@@ -132,9 +129,8 @@ void decompress()
     sourceFileHeader.close();
 
     huffmanNode *huffmanTreeRoot = buildHuffmanTree(freqMap);
-    huffmanTreeRoot == NULL ? cout << "root is null" : cout << "root is fine";
 
-    cout << "Printing HuffMan Tree while decompressing\n";
+    cout << "HuffMan Tree while decompressing\n";
     printTree(huffmanTreeRoot);
 
     ifstream sourceFile(sourceFileName, ios::in | ios::binary);
